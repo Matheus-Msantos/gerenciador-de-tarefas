@@ -2,7 +2,9 @@ import React from 'react';
 
 function ListarTarefas() {
     return (
-        <h1>Listar</h1>
+        <div className="g-listar-container">
+            <a href="/cadastrar">Nova tarefa</a>
+        </div>
     );
 }
 
