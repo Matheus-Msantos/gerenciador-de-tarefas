@@ -41,17 +41,18 @@ function CadastrarTarefa() {
               setTarefa(e.target.value);
             }}
             required
+            data-testid="text-tarefa"
           />
 
           <div className="g-cadastrar-grupo-btn">
             <a className="g-btn-back" href="/">Voltar</a>
-            <button className="g-btn-submit" type="submit">cadastrar</button>
+            <button className="g-btn-submit" type="submit" data-testid="btn-cadastrar">cadastrar</button>
           </div>
         </form>
       </section>
 
       <div className={modal ? `g-cadastrar-modal-overley--active` : `g-cadastrar-modal-overley`} onClick={() => mostrarModal(false)}></div>
-      <div className={modal ? `g-cadastrar-modal-container--active` : 'g-cadastrar-modal-container'}>
+      <div className={modal ? `g-cadastrar-modal-container--active` : 'g-cadastrar-modal-container'} data-testid="modal">
         <div className="g-cadastrar-modal-header">
           <p>Sucesso</p>
         </div>
