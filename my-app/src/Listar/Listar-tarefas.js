@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ItensListarTarefas from './itens-listar-tarefas';
 
 function ListarTarefas() {
 
@@ -32,7 +33,9 @@ function ListarTarefas() {
         </div>
 
         <div className="g-listar-body">
-
+          <ItensListarTarefas
+            tarefas={tarefas}
+            recarregarTarefas={setCarregarTarefas} />
         </div>
       </div>
 
