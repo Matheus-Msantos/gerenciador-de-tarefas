@@ -14,7 +14,7 @@ function ItensListarTarefas(props) {
     props.tarefas.map(tarefa =>
       <div className="g-listar-tarefas-box" key={tarefa.id} data-testid="tarefa">
 
-        <p className={marcada ? "g-listar-tarefas-marcada" : ''} data-testid="tarefa-nome">{tarefa.nome}</p>
+        <p className={tarefa.concluida ? "g-listar-tarefas-marcada" : ''} data-testid="tarefa-nome">{tarefa.nome}</p>
 
         <div className={tarefa.concluida ? 'g-listar-tarefas-btn--edit_none' : 'g-listar-tarefas-btn--edit'}>
           <a href={"/atualizar/" + tarefa.id}>Editar</a>
