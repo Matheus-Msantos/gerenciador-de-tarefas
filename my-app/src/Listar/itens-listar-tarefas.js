@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import propTypes from 'prop-types';
 import ConcluirTarefa from "./concluir-tarefa";
-
+import RemoverTarefa from './remover-tarefa';
 
 function ItensListarTarefas(props) {
 
@@ -23,6 +23,11 @@ function ItensListarTarefas(props) {
             recarregarTarefas={props.recarregarTarefas}
             className={tarefa.concluida ? 'g-listar-tarefas-modal-hidde' : ''}
           />
+
+
+          <RemoverTarefa
+            tarefas={tarefa}
+            recarregarTarefas={props.recarregarTarefas} />
         </div>
 
         <div className={tarefa.concluida ? 'g-listar-tarefas-btn--edit_none' : 'g-listar-tarefas-btn--edit'}>
