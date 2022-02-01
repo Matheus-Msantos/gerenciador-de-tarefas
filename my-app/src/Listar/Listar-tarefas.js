@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import ItensListarTarefas from './itens-listar-tarefas';
+import Paginacao from './paginacao';
 
 function ListarTarefas() {
 
+  const ITENS_POR_PAG = 3
+
   const [tarefas, setTarefas] = useState([]);
   const [carregarTarefas, setCarregarTarefas] = useState(true);
+  const [totalItems, setTotalItems] = useState(0);
+  const [paginaAtual, setPaginaAtual] = useState(1);
 
   useEffect(() => {
 
     const obterTarefas = () => {
       const tarefasDb = localStorage['tarefas'];
-      let listarTarefas = tarefasDb ? JSON.parse(tarefasDb) : [];
-      setTarefas(listarTarefas)
-      console.log(listarTarefas);
+      let listaTarefas = tarefasDb ? JSON.parse(tarefasDb) : [];
+      setTotalItems(listaTarefas.length);
+      setTarefas(listaTarefas.splice((paginaAtual - 1) * ITENS_POR_PAG, ITENS_POR_PAG));
     }
 
     if (carregarTarefas) {
@@ -20,7 +25,12 @@ function ListarTarefas() {
       setCarregarTarefas(false)
     }
 
-  }, [carregarTarefas]);
+  }, [carregarTarefas, paginaAtual]);
+
+  const mudarPagina = (pagina) => {
+    setPaginaAtual(pagina);
+    setCarregarTarefas(true);
+  }
 
   return (
     <div className="g-listar-container">
@@ -38,6 +48,12 @@ function ListarTarefas() {
             recarregarTarefas={setCarregarTarefas} />
         </div>
       </div>
+
+      <Paginacao
+        totalItems={totalItems}
+        itemsPorPagina={ITENS_POR_PAG}
+        paginaAtual={paginaAtual}
+        mudarPagina={mudarPagina} />
 
     </div>
   );
