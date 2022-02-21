@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ItensListarTarefas from './itens-listar-tarefas';
 import Paginacao from './paginacao';
+import Ordenacao from './ordenacao';
 
 function ListarTarefas() {
 
@@ -10,12 +11,21 @@ function ListarTarefas() {
   const [carregarTarefas, setCarregarTarefas] = useState(true);
   const [totalItems, setTotalItems] = useState(0);
   const [paginaAtual, setPaginaAtual] = useState(1);
+  const [ordenarAsc, setOrdenarAsc] = useState(false);
+  const [ordenarDesc, setOrdenarDesc] = useState(false);
 
   useEffect(() => {
 
     const obterTarefas = () => {
       const tarefasDb = localStorage['tarefas'];
       let listaTarefas = tarefasDb ? JSON.parse(tarefasDb) : [];
+
+      if (ordenarAsc) {
+        listaTarefas.sort((l1, l2) => (l1.nome.toLowerCase() > l2.nome.toLowerCase() ? 1 : -1));
+      } else if (ordenarDesc) {
+        listaTarefas.sort((l1, l2) => (l1.nome.toLowerCase() < l2.nome.toLowerCase() ? 1 : -1));
+      }
+
       setTotalItems(listaTarefas.length);
       setTarefas(listaTarefas.splice((paginaAtual - 1) * ITENS_POR_PAG, ITENS_POR_PAG));
     }
@@ -25,10 +35,25 @@ function ListarTarefas() {
       setCarregarTarefas(false)
     }
 
-  }, [carregarTarefas, paginaAtual]);
+  }, [carregarTarefas, paginaAtual, ordenarAsc, ordenarDesc]);
 
   const mudarPagina = (pagina) => {
     setPaginaAtual(pagina);
+    setCarregarTarefas(true);
+  }
+
+  const ordenarLista = () => {
+    if (!ordenarAsc && !ordenarDesc) {
+      setOrdenarAsc(true);
+      setOrdenarDesc(false);
+    } else if (ordenarAsc) {
+      setOrdenarAsc(false);
+      setOrdenarDesc(true);
+    } else {
+      setOrdenarAsc(false);
+      setOrdenarDesc(false);
+    }
+
     setCarregarTarefas(true);
   }
 
@@ -38,6 +63,10 @@ function ListarTarefas() {
 
       <div className="g-listar-table">
         <div className="g-listar-table-head">
+          <button onClick={() => ordenarLista()}>
+            Ordenar
+            <Ordenacao ordenarAsc={ordenarAsc} ordenarDesc={ordenarDesc} />
+          </button>
           <p>Tarefas</p>
           <a href="/cadastrar">Nova tarefa</a>
         </div>
