@@ -14,7 +14,10 @@ describe('Teste do componente de ordenação', () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 
+  //TO DO [Verificar se as classe então de acordo com as ordenação]
+  /*
   it('Ordenação padrão', () => {
-
+    const { getByTestId } = render ();
   });
+  */
 }); 

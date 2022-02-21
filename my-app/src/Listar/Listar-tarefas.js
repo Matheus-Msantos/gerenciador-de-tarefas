@@ -13,12 +13,15 @@ function ListarTarefas() {
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [ordenarAsc, setOrdenarAsc] = useState(false);
   const [ordenarDesc, setOrdenarDesc] = useState(false);
+  const [filtro, setFiltro] = useState('');
 
   useEffect(() => {
 
     const obterTarefas = () => {
       const tarefasDb = localStorage['tarefas'];
       let listaTarefas = tarefasDb ? JSON.parse(tarefasDb) : [];
+
+      listaTarefas = listaTarefas.filter(tarefa => tarefa.nome.toLowerCase().indexOf(filtro.toLowerCase()) === 0)
 
       if (ordenarAsc) {
         listaTarefas.sort((l1, l2) => (l1.nome.toLowerCase() > l2.nome.toLowerCase() ? 1 : -1));
@@ -57,6 +60,13 @@ function ListarTarefas() {
     setCarregarTarefas(true);
   }
 
+  const filtraTarefa = (e) => {
+
+    setFiltro(e.target.value);
+    setCarregarTarefas(true)
+
+  }
+
   return (
     <div className="g-listar-container">
       <h1>Lista de Tarefas</h1>
@@ -69,6 +79,13 @@ function ListarTarefas() {
           </button>
           <p>Tarefas</p>
           <a href="/cadastrar">Nova tarefa</a>
+
+          <input
+            type='search'
+            value={filtro}
+            onChange={filtraTarefa}
+            data-testid="Inputsearch"
+          />
         </div>
 
         <div className="g-listar-body">
