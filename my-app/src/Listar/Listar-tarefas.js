@@ -38,7 +38,7 @@ function ListarTarefas() {
       setCarregarTarefas(false)
     }
 
-  }, [carregarTarefas, paginaAtual, ordenarAsc, ordenarDesc]);
+  }, [carregarTarefas, paginaAtual, ordenarAsc, ordenarDesc, filtro]);
 
   const mudarPagina = (pagina) => {
     setPaginaAtual(pagina);
@@ -88,7 +88,7 @@ function ListarTarefas() {
           />
         </div>
 
-        <div className="g-listar-body">
+        <div className="g-listar-body" data-testid="tabela">
           <ItensListarTarefas
             tarefas={tarefas}
             recarregarTarefas={setCarregarTarefas} />
