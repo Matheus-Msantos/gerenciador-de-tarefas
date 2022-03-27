@@ -67,7 +67,7 @@ function AtualizarTarefa(props) {
           />
 
           <div className="g-atualizar-btn__group">
-            <button type="submit" onClick={() => abrirModal()}>Atualizar</button>
+            <button type="submit" onClick={() => abrirModal()} data-testid="btn-atualizar">Atualizar</button>
             <a href="/">Voltar</a>
           </div>
         </form>
