@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import propTypes from 'prop-types';
 import ConcluirTarefa from "./concluir-tarefa";
 import RemoverTarefa from './remover-tarefa';
+import { A } from "hookrouter";
 
 function ItensListarTarefas(props) {
 
@@ -31,7 +32,7 @@ function ItensListarTarefas(props) {
         </div>
 
         <div className={tarefa.concluida ? 'g-listar-tarefas-btn--edit_none' : 'g-listar-tarefas-btn--edit'}>
-          <a href={"/atualizar/" + tarefa.id}>Editar</a>
+          <A href={"/atualizar/" + tarefa.id}>Editar</A>
         </div>
       </div>
     )
